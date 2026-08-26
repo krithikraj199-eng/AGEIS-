@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# Python cache & build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Local Environment & Secrets (NEVER bake secrets into image)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local runtime data
+data/
+logs/
+*.log
