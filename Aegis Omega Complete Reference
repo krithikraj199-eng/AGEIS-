@@ -1,0 +1,680 @@
+# AEGIS Ω — Complete Project Reference Document
+
+> **Everything built, planned, and designed in this conversation — compiled into one place.**
+
+---
+
+## 🏆 PROJECT IDENTITY
+
+| Field | Value |
+|---|---|
+| **Name** | AEGIS Ω (Omega) |
+| **Full Title** | Autonomous Institutional Intelligence & Self-Healing Operating System |
+| **One-line Concept** | A persistent multi-agent digital institution that continuously observes a simulated enterprise, predicts emerging failures, investigates their causes, autonomously plans and executes safe remediation, verifies the outcome, recovers from failed agents/actions, and permanently learns from every incident. |
+| **Type** | 100% Software — No hardware, no sensors, no IoT |
+| **Target** | Google AI Competition — Grand Prize ($50,000 + $5,000 GCP credits) |
+| **Workspace** | `F:\AGEIS` |
+
+---
+
+## 🎯 PURPOSE & PROBLEM STATEMENT
+
+### What Problem Does AEGIS Ω Solve?
+
+Modern enterprises run thousands of interconnected systems. When one fails, it cascades — databases crash APIs, APIs break portals, portals lock out users. Current approaches are:
+
+- **Reactive** — humans notice after users complain
+- **Alert-based** — dashboards flood operators with 500 alerts for 1 root cause
+- **Manual** — engineers spend hours diagnosing what a machine should identify in seconds
+
+### AEGIS Ω's Solution
+
+AEGIS Ω creates a **digital twin** of an entire institution and gives it an **autonomous nervous system** that:
+
+1. **Observes** everything continuously
+2. **Detects** anomalies using deterministic thresholds + AI correlation
+3. **Investigates** by collecting evidence and generating hypotheses
+4. **Identifies** the single root cause behind multiple symptoms
+5. **Plans** multiple remediation strategies
+6. **Simulates** "what if" counterfactual futures before acting
+7. **Executes** the safest effective plan with scoped permissions
+8. **Verifies** the outcome against success criteria
+9. **Recovers** if the action fails — rollback + replan
+10. **Learns** from every incident to prevent future occurrences
+11. **Predicts** upcoming failures from metric trends
+12. **Prevents** incidents before they happen
+
+### The 4 Intelligence Levels
+
+| Level | Capability | Description |
+|---|---|---|
+| Level 1 | **Reactive** | Detect → Fix |
+| Level 2 | **Investigative** | Detect → Understand → Fix |
+| Level 3 | **Autonomous** | Detect → Understand → Simulate → Fix → Verify |
+| Level 4 | **Institutional** | Detect → Understand → Simulate → Fix → Verify → Learn → Predict → Prevent |
+
+**AEGIS Ω operates at Level 4.**
+
+---
+
+## 🏗️ THREE-PART MASTER ARCHITECTURE
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    AEGIS Ω ARCHITECTURE                      │
+├─────────────────┬───────────────────┬───────────────────────┤
+│   PART 1        │    PART 2         │    PART 3             │
+│   DIGITAL WORLD │    AI INTELLIGENCE│    GOVERNANCE         │
+│                 │                   │                       │
+│ • Institution   │ • Sentinel        │ • Agent Registry      │
+│ • Assets        │ • Investigator    │ • Agent Identity      │
+│ • Dependencies  │ • Evidence Agent  │ • Agent Gateway       │
+│ • Metrics       │ • Dependency Agent│ • Permissions         │
+│ • Events        │ • Security Agent  │ • Memory Bank         │
+│ • Time Engine   │ • Root Cause      │ • Institutional Learn │
+│ • Chaos Engine  │ • Planner         │ • Prediction Engine   │
+│ • Digital Twin  │ • Counterfactual  │ • Preventive Action   │
+│                 │ • Risk Engine     │ • Security/Guardrails │
+│                 │ • Executor        │ • Observability       │
+│                 │ • Verifier        │ • Audit Trail         │
+│                 │ • Recovery        │ • Command Center UI   │
+└─────────────────┴───────────────────┴───────────────────────┘
+```
+
+---
+
+## 🟦 PART 1 — DIGITAL WORLD ENGINE (✅ BUILT)
+
+### What It Is
+A complete virtual university simulation with realistic infrastructure, generating continuous events that AEGIS's AI agents observe and respond to.
+
+### 1.1 Digital Institution
+A virtual university called **"AEGIS Digital University"** with departments:
+
+| Department | Purpose |
+|---|---|
+| Computer Science | Labs, servers, GPU computing |
+| Electronics | Simulation servers, FPGA |
+| Mechanical | CAD servers |
+| Civil | CAD workstations |
+| Administration | Offices, exam systems |
+| Library | Digital catalog terminals |
+| Infrastructure | Core systems (DNS, LDAP, firewalls) |
+| Security | Firewalls, VPN |
+
+### 1.2 Virtual Asset Model — 130 Assets Created
+
+Every object has a full identity:
+
+```
+Asset
+ ├── asset_id        (e.g., "DB-MAIN-01")
+ ├── name            (e.g., "Main PostgreSQL Cluster")
+ ├── asset_type      (workstation/server/database/application/service/network_node/storage/firewall/load_balancer)
+ ├── department       
+ ├── status          (healthy/degraded/warning/critical/offline)
+ ├── criticality     (1-10)
+ ├── metrics         (cpu, memory, disk, latency, error_rate, connections, response_time, throughput, queue_depth)
+ ├── dependencies    (list of asset IDs this depends on)
+ ├── dependents      (list of asset IDs that depend on this)
+ ├── version
+ ├── last_deployment
+ └── metadata
+```
+
+**Asset Breakdown:**
+
+| Category | Count | Examples |
+|---|---|---|
+| Core Infrastructure | 15 | Firewalls, Load Balancers, DNS, LDAP, SAN Storage, Mail Server |
+| Databases | 10 | Main PostgreSQL, Student DB, Staff DB, Exam DB, Finance DB, Analytics DW |
+| Services/APIs | 15 | Auth Service, Student API, Staff API, Exam API, Cache, Queue, Search |
+| Applications | 20 | Student Portal, Faculty Portal, LMS, Exam Platform, ERP, Fee Portal |
+| Network Nodes | 12 | Core Switches, Distribution Switches, WiFi Controllers, WAN/VPN Gateways |
+| Workstations | 58 | Lab workstations across all departments (representative subset) |
+| **TOTAL** | **130** | |
+
+### 1.3 Asset Dependency Graph — 235 Edges
+
+Built with **NetworkX** directed graph:
+- Edge A → B means "A depends on B"
+- If B fails, everything depending on B transitively is affected
+
+**Realistic dependency layers:**
+```
+STORAGE (SAN-01)
+  └→ DATABASES (DB-MAIN-01, DB-STUDENT-01, ...)
+      └→ SERVICES (SVC-AUTH-01, SVC-CACHE-01, ...)
+          └→ APIs (API-STUDENT-01, API-EXAM-01, ...)
+              └→ APPLICATIONS (APP-PORTAL-01, APP-ERP-01, ...)
+                  └→ USER DEVICES (Workstations)
+```
+
+**Graph capabilities:**
+- `get_blast_radius(asset_id)` — how many assets would fail if this one dies
+- `find_cascading_path(source, target)` — how failure propagates between two assets
+- `find_critical_assets(top_n)` — most impactful assets by betweenness centrality + dependents + criticality
+- `get_single_points_of_failure()` — nodes whose removal disconnects the graph
+
+**Top Critical Assets (by Impact Score):**
+
+| Rank | Asset | Dependents | Impact Score |
+|---|---|---|---|
+| #1 | Primary DNS Server | 51 | 19.35 |
+| #2 | Distribution Switch — CSE | 24 | 10.47 |
+| #3 | Authentication Service | 20 | 10.13 |
+| #4 | Core Switch A | 20 | 10.00 |
+
+### 1.4 Metrics Engine
+
+- **Natural drift** with Gaussian noise + diurnal load patterns (busy 9-17, quiet 22-6)
+- **Deterministic threshold checks** (no LLM needed for obvious numeric comparisons):
+  - CPU: warning 75%, critical 90%
+  - Memory: warning 80%, critical 95%
+  - Disk: warning 80%, critical 95%
+  - Network latency: warning 100ms, critical 500ms
+  - Error rate: warning 5%, critical 15%
+- **Stress application** for chaos injection (cpu_spike, memory_leak, disk_exhaustion, network_latency, connection_flood, error_spike, response_degradation, queue_backup, throughput_drop)
+- **Trend detection** via linear regression for the Prediction Engine
+- **History recording** — up to 500 snapshots per asset
+
+### 1.5 Event Engine
+
+Three event sources:
+1. **Metric threshold breaches** — automated alerts when values exceed warning/critical
+2. **Ambient operational events** — random logins, backups, deployments
+3. **Chaos-injected events** — from the Chaos Engine
+
+Event types: `CPU_NORMAL`, `CPU_WARNING`, `CPU_CRITICAL`, `MEMORY_WARNING`, `MEMORY_CRITICAL`, `DISK_FULL`, `NETWORK_LATENCY`, `NETWORK_FAILURE`, `APPLICATION_ERROR`, `APPLICATION_CRASH`, `DATABASE_TIMEOUT`, `DATABASE_OVERLOAD`, `SERVICE_CRASH`, `LOGIN_SUCCESS`, `LOGIN_FAILURE`, `DEPLOYMENT_CHANGE`, `CONFIGURATION_CHANGE`, `SECURITY_ALERT`, `BACKUP_SUCCESS`, `BACKUP_FAILURE`
+
+**Pub/Sub model** — subscribers (Sentinel agent, Dashboard) receive events in real-time.
+
+### 1.6 Time Engine
+
+- Independent simulation clock (not tied to real time)
+- Configurable speed: `speed=60` means 1 real-second = 1 simulated minute
+- Supports: pause, resume, set_speed, advance_hours, advance_days
+- Day logging for institutional history accumulation
+- Current setting: starts at `2026-08-01 08:00:00`, running at 60x speed
+
+### 1.7 Chaos Engine — 10 Failure Scenarios
+
+The interactive **"Chaos Lab"** — the primary demo feature:
+
+| # | Scenario | Target | Severity | Stress Steps | Description |
+|---|---|---|---|---|---|
+| 1 | 🔥 Database Connection Crisis | DB-MAIN-01 | CRITICAL | 12 | Connection pool exhaustion → cascading API timeouts |
+| 2 | 💧 Progressive Memory Leak | SRV-CSE-WEB-01 | HIGH | 4 | App server memory leak → gradual degradation |
+| 3 | 🌐 Network Segment Failure | NET-CORE-01 | CRITICAL | 9 | Core switch failure → department isolation |
+| 4 | 💾 Disk Space Exhaustion | LOG-01 | HIGH | 4 | Log accumulation → exhausting central storage |
+| 5 | ⚡ Auth Service Crash | SVC-AUTH-01 | CRITICAL | 10 | Auth failure → locks out all users from all apps |
+| 6 | 🛡️ Credential Stuffing Attack | SVC-AUTH-01 | HIGH | 4 | Automated credential attacks (security event) |
+| 7 | 🚀 Bad Deployment Rollout | APP-PORTAL-01 | HIGH | 4 | Failed deployment → application errors |
+| 8 | 🔥 Compute Storm | SRV-CSE-GPU-01 | HIGH | 5 | Runaway process → CPU storm across compute nodes |
+| 9 | 📬 Message Queue Overflow | SVC-QUEUE-01 | MEDIUM | 4 | Queue backup → notification/processing delays |
+| 10 | 💥 Total Cascading Failure | SAN-01 | CRITICAL | 17 | Storage failure → cascades through ENTIRE infrastructure |
+
+Each scenario is a **timed stress chain** that propagates through the dependency graph. Example (Database Crisis):
+
+```
+DB-MAIN-01 connection_flood (0s) → DB-MAIN-01 response_degradation (0s) →
+DB-MAIN-01 cpu_spike (1s) → DB-MAIN-02 connection_flood (2s) →
+SVC-AUTH-01 response_degradation (3s) → SVC-CACHE-01 error_spike (3s) →
+API-STUDENT-01 response_degradation (5s) → API-STAFF-01 response_degradation (5s) →
+API-EXAM-01 error_spike (6s) → APP-PORTAL-01 error_spike (8s) →
+APP-PORTAL-02 error_spike (8s) → APP-ERP-01 error_spike (9s)
+```
+
+### 1.8 Digital Twin State Manager
+
+Central orchestrator that ties everything together:
+- Runs the async simulation loop (2-second tick interval)
+- Manages incidents (create, update, add timeline entries)
+- Provides world state queries
+- WebSocket broadcasting to frontend
+- Connects chaos engine incidents automatically
+
+---
+
+## 🟨 PART 2 — AI INTELLIGENCE ENGINE (📋 DESIGNED, PENDING BUILD)
+
+### Agent Pipeline
+
+```
+EVENT STREAM → SENTINEL → INVESTIGATOR → EVIDENCE AGENT → DEPENDENCY AGENT →
+SECURITY AGENT → ROOT CAUSE ENGINE → PLANNER → COUNTERFACTUAL ENGINE →
+RISK ENGINE → EXECUTOR → VERIFIER → RECOVERY/REPLANNING
+```
+
+### Agent Descriptions
+
+| # | Agent | Purpose | Input | Output |
+|---|---|---|---|---|
+| 1 | **Sentinel** | Continuous monitoring | Events, metrics, incidents, state | NORMAL / WARNING / ANOMALY / CRITICAL |
+| 2 | **Investigator** | Collect evidence, generate hypotheses | Recent events, logs, metrics, history, config changes, dependencies | Multiple hypotheses with confidence |
+| 3 | **Evidence Agent** | Evidence-based reasoning layer | Claims, raw data | Evidence items with supporting/contradicting data + confidence |
+| 4 | **Dependency Agent** | Graph traversal + blast radius | Asset ID, dependency graph | Affected services, upstream/downstream, blast radius, criticality |
+| 5 | **Security Agent** | Classify incidents | Events, patterns | OPERATIONAL_FAILURE / CONFIGURATION_ERROR / HUMAN_ERROR / SECURITY_EVENT / UNKNOWN |
+| 6 | **Root Cause Engine** | Combine all analysis | Evidence, dependencies, history, metrics, security classification | Root cause + confidence + affected systems + evidence |
+| 7 | **Planner** | Generate multiple remediation plans | Root cause, affected systems, memory | Multiple plans with actions, risk, downtime, rollback method |
+| 8 | **Counterfactual Engine** | "What if" simulation | Candidate plans | Expected recovery %, risk %, downtime, secondary failures |
+| 9 | **Risk Engine** | 0-100 risk scoring | Proposed actions | Risk score determining auto-execute / supervisor / human / block |
+| 10 | **Executor** | Execute permitted tools | Selected plan | Tool execution results |
+| 11 | **Verifier** | Measure + compare | Before/after metrics | SUCCESS / FAILED |
+| 12 | **Recovery** | Rollback + replan | Failed verification | Rollback → new plan → re-execute |
+
+### Risk Levels
+
+| Score | Level | Action |
+|---|---|---|
+| 0–30 | LOW | Auto execute |
+| 31–60 | MEDIUM | Supervisor review |
+| 61–80 | HIGH | Human approval required |
+| 81–100 | CRITICAL | Blocked |
+
+### Executor Tool Permissions
+
+| Tool | Risk Score |
+|---|---|
+| `clear_cache` | 8 |
+| `restart_service` | 22 |
+| `scale_service` | 25 |
+| `rollback_deployment` | 47 |
+| `disable_account` | 61 |
+| `quarantine_server` | 76 |
+| `delete_database` | 100 |
+
+### Tech Stack for AI
+
+| Component | Technology |
+|---|---|
+| AI Model | Gemini 2.5+ (via Gemini API / Vertex AI) |
+| Agent Orchestration | Google ADK |
+| GenAI SDK | google-genai |
+
+---
+
+## 🟥 PART 3 — AUTONOMOUS GOVERNANCE ENGINE (📋 DESIGNED, PENDING BUILD)
+
+### Modules
+
+| Module | Purpose |
+|---|---|
+| **Agent Registry** | Every agent registered with ID, version, status, capabilities, permissions, health, heartbeat |
+| **Agent Identity** | Unique identity determining access rights, tool permissions, data access |
+| **Agent Gateway** | All agent-to-agent communication passes through: auth, authz, routing, rate limits, validation |
+| **Permission System** | Capability-based access control (Sentinel: READ_METRICS; Executor: CALL_TOOLS; etc.) |
+| **Memory Bank** | Three types: Episodic (what happened), Semantic (what the institution knows), Procedural (what works) |
+| **Institutional Learning** | Post-incident: outcome → memory update → pattern extraction → future recommendation |
+| **Prediction Engine** | Linear regression on metric trends → predicted time to threshold → preventive incidents |
+| **Preventive Action** | Prediction → risk assessment → preventive plan → approval → action → verification |
+| **Security/Guardrails** | Treat external data as untrusted; protect against prompt injection, malicious log instructions |
+| **Observability** | OpenTelemetry-compliant traces; every agent action produces audit entries |
+| **Audit Trail** | Complete timestamp-level recording of every operation in the system |
+
+### Memory System Design
+
+**Episodic Memory** (What happened?):
+```
+Incident #19482 → Root cause: DB overload → Action: Scale DB → Outcome: Success
+```
+
+**Semantic Memory** (What does the institution know?):
+```
+"Database connection exhaustion commonly occurs after deployment pattern X."
+```
+
+**Procedural Memory** (What works?):
+```
+"For database overload, scaling connection capacity succeeded in 87% of similar incidents."
+```
+
+---
+
+## ☁️ CLOUD ARCHITECTURE (Target Deployment)
+
+```
+                     INTERNET
+                         │
+                  ┌─────────────┐
+                  │   Next.js   │ ← Cloud Run
+                  │  Dashboard  │
+                  └──────┬──────┘
+                         │
+                  ┌─────────────┐
+                  │   Agent     │ ← Cloud Run
+                  │   Gateway   │
+                  └──────┬──────┘
+                         │
+              ┌──────────────────────┐
+              │     Cloud Run        │
+              │   AEGIS Runtime      │
+              └──────────┬───────────┘
+                         │
+                    Google ADK
+                         │
+                   Gemini 2.5+
+                         │
+          ┌──────────────┼──────────────┐
+          │              │              │
+       Pub/Sub       Cloud SQL       Firestore
+          │              │              │
+      Event Bus    Institution       Memory
+                     State            State
+```
+
+---
+
+## 📁 REPOSITORY STRUCTURE (Current State)
+
+```
+F:\AGEIS\
+│
+├── backend/                              ← Python FastAPI backend
+│   ├── __init__.py
+│   ├── config.py                         ← Global configuration
+│   ├── main.py                           ← FastAPI app with all routes + WebSocket
+│   ├── .env                              ← Environment variables
+│   ├── requirements.txt                  ← Python dependencies
+│   │
+│   ├── digital_world/                    ← ✅ PART 1 (BUILT)
+│   │   ├── __init__.py
+│   │   ├── models.py                     ← Pydantic models (assets, events, incidents, plans, traces, memories, governance, predictions)
+│   │   ├── institution.py                ← Institution builder (130 assets, dependency wiring)
+│   │   ├── dependencies.py               ← NetworkX dependency graph (blast radius, critical paths, SPOF)
+│   │   ├── metrics.py                    ← Metrics engine (drift, stress, threshold alerts, trend detection)
+│   │   ├── events.py                     ← Event engine (metric events, ambient events, chaos events)
+│   │   ├── time_engine.py                ← Time simulation (speed control, day tracking)
+│   │   ├── chaos_engine.py               ← 10 failure scenarios + custom stress injection
+│   │   └── state.py                      ← Central state manager (simulation loop, incidents, WebSocket)
+│   │
+│   ├── agents/                           ← ⏳ PART 2 (PENDING)
+│   │   ├── sentinel/
+│   │   ├── investigator/
+│   │   ├── evidence/
+│   │   ├── dependency/
+│   │   ├── security/
+│   │   ├── planner/
+│   │   ├── executor/
+│   │   ├── verifier/
+│   │   ├── memory_agent/
+│   │   └── predictor/
+│   │
+│   ├── gateway/                          ← ⏳ PART 3 (PENDING)
+│   ├── runtime/
+│   ├── governance/
+│   ├── memory/
+│   ├── observability/
+│   ├── tools/
+│   └── database/
+│
+├── frontend/                             ← ✅ Next.js Command Center (BUILT)
+│   ├── app/
+│   │   ├── globals.css                   ← Complete design system (deep space aesthetic)
+│   │   ├── layout.js                     ← Root layout + metadata
+│   │   └── page.js                       ← Full Command Center dashboard
+│   ├── .env.local                        ← API URL config
+│   ├── package.json
+│   └── ...
+│
+├── venv/                                 ← Python virtual environment
+├── infrastructure/                       ← Cloud deployment (pending)
+├── docs/                                 ← Documentation (pending)
+└── tests/                                ← Test suite (pending)
+```
+
+---
+
+## 🌐 API ENDPOINTS (All Working)
+
+### World State
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/health` | Health check |
+| GET | `/api/world/state` | Current world state summary |
+| GET | `/api/world/time` | Simulation time |
+| POST | `/api/world/time` | Control time (pause/resume/set_speed/advance) |
+
+### Assets
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/assets` | All assets (filterable by type/department/status) |
+| GET | `/api/assets/{id}` | Detailed asset info + metrics history + dependencies |
+| GET | `/api/assets/{id}/metrics/history` | Metric history for an asset |
+| GET | `/api/assets/{id}/metrics/trend` | Trend analysis for a specific metric |
+
+### Dependency Graph
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/graph/summary` | Graph summary (nodes, edges, density, DAG status) |
+| GET | `/api/graph/visualization` | Full graph data for frontend visualization |
+| GET | `/api/graph/blast-radius/{id}` | Blast radius calculation |
+| GET | `/api/graph/critical-assets` | Most critical assets by impact score |
+| GET | `/api/graph/cascade-path?source=X&target=Y` | Failure propagation path |
+| GET | `/api/graph/spof` | Single points of failure |
+
+### Events
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/events` | Recent events |
+| GET | `/api/events/stats` | Event statistics |
+| GET | `/api/events/asset/{id}` | Events for a specific asset |
+
+### Chaos Lab
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/chaos/scenarios` | Available chaos scenarios (10 scenarios) |
+| POST | `/api/chaos/inject` | Inject a failure scenario |
+| POST | `/api/chaos/stress` | Inject stress on single asset |
+| POST | `/api/chaos/recover` | Recover from a failure |
+| POST | `/api/chaos/recover-all` | Recover from all active failures |
+| GET | `/api/chaos/active` | Active failures |
+| GET | `/api/chaos/history` | Failure injection history |
+
+### Incidents
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/incidents` | All incidents |
+| GET | `/api/incidents/{id}` | Specific incident detail |
+| POST | `/api/incidents` | Create incident manually |
+
+### WebSocket
+| Endpoint | Description |
+|---|---|
+| `ws://localhost:8000/ws` | Real-time world state streaming |
+
+---
+
+## 🖥️ COMMAND CENTER UI (✅ BUILT)
+
+### Design Aesthetic
+- **Deep space command center** theme with dark background (`#0a0e1a`)
+- **Glassmorphism** panels with subtle borders
+- **Gradient accents** — blue-violet-cyan-emerald-amber-rose palette
+- **Monospace fonts** (JetBrains Mono) for data, **Inter** for UI text
+- **Micro-animations** — pulsing status dots, hover transforms, slide-in effects
+- **Responsive grid** — adapts from 3-column to 2-column to 1-column
+
+### Dashboard Panels
+
+| Panel | Description |
+|---|---|
+| **Top Bar** | AEGIS Ω branding, system health %, asset count, incident count, simulation time, WebSocket status |
+| **KPI Row** (6 cards) | Overall Health, Total Assets, Active Incidents, Events Today, Critical Assets, AI Agents |
+| **Infrastructure Assets** | Live table with status dots, CPU/MEM/DISK/LAT metrics, sorted by severity |
+| **Event Stream** | Real-time scrolling feed with severity color-coding (info/low/medium/high/critical) |
+| **Active Incidents** | Incident cards with ID, severity badge, title, description, affected assets, timeline |
+| **Chaos Lab** | Grid of 10 injectable failure scenarios with inject buttons + "Recover All" button |
+| **Dependency Graph** | Summary stats: 130 nodes, 235 edges, density, DAG validation |
+| **Critical Assets** | Impact analysis ranking — assets sorted by dependents count + impact score |
+
+---
+
+## 🧪 VERIFIED OUTCOMES (What We Confirmed Working)
+
+### Backend Verification
+- ✅ **130 assets loaded** across all departments
+- ✅ **235 dependency edges** wired correctly
+- ✅ **Simulation running** at 60x speed with 2-second tick
+- ✅ **Events generating** — 1,000+ events within minutes of startup
+- ✅ **Metrics fluctuating** naturally with diurnal patterns
+- ✅ **Chaos injection working** — "Database Connection Crisis" successfully injected
+- ✅ **Incident creation** — INC-00001 created automatically from chaos injection
+- ✅ **System health dropping** — from 96.2% healthy to 0.0% during crisis
+- ✅ **Blast radius calculation** — DB-MAIN-01 affects 50+ assets across 2 depth levels
+- ✅ **Critical asset ranking** — DNS Server ranked #1 with 51 dependents, impact 19.35
+- ✅ **All API endpoints responding** with correct JSON payloads
+- ✅ **WebSocket connection** streaming real-time updates
+
+### Frontend Verification
+- ✅ **Dashboard rendering** with all 8 panels
+- ✅ **Real-time data updates** — KPIs, events, metrics changing live
+- ✅ **Chaos Lab visible** with all 10 scenarios
+- ✅ **Incident display** — showing INC-00001 with timeline and severity
+- ✅ **"Recover All" button** working to clear active failures
+- ✅ **LIVE indicator** — green dot confirming WebSocket connection
+- ✅ **Deep space aesthetic** — dark theme, gradient accents, monospace data
+
+---
+
+## 🚀 HOW TO RUN
+
+### Prerequisites
+- Python 3.12+
+- Node.js 18+
+
+### Start Backend
+```powershell
+cd F:\AGEIS
+.\venv\Scripts\python.exe -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### Start Frontend
+```powershell
+cd F:\AGEIS\frontend
+npm run dev
+```
+
+### Access
+- **Command Center**: http://localhost:3000
+- **API Docs**: http://localhost:8000/docs
+- **API**: http://localhost:8000/api/
+
+---
+
+## 📊 JUDGING CRITERIA MAPPING
+
+| Criterion (Weight) | AEGIS Ω Feature | Status |
+|---|---|---|
+| **Innovation & Operational Utility (40%)** | | |
+| Real-world friction | Automated incident management for enterprise | ✅ Designed |
+| Multi-agent complexity | 10+ specialized agents in pipeline | 📋 Planned |
+| Digital institution + self-healing | Full simulation + autonomous remediation | ✅ Part 1 Built |
+| Prediction + prevention | Trend detection → preventive action | 📋 Planned |
+| **Architecture (30%)** | | |
+| Agent Registry | Every agent registered with identity, capabilities, permissions | 📋 Planned |
+| Agent Runtime | Google ADK orchestration | 📋 Planned |
+| Memory Bank | Episodic + Semantic + Procedural memory | 📋 Planned |
+| Agent Identity | Unique identity with scoped permissions | 📋 Planned |
+| Agent Gateway | Communication control with auth/authz/routing | 📋 Planned |
+| Model Armor/Guardrails | Input sanitization, tool authorization | 📋 Planned |
+| Agent Observability | OpenTelemetry traces, audit logs | 📋 Planned |
+| State management | Event/state/history architecture | ✅ Built |
+| Tool isolation | Permission-controlled executor | 📋 Planned |
+| Failure tolerance | Rollback + re-planning loop | 📋 Planned |
+| **Demo & Production Readiness (30%)** | | |
+| Live crisis injection | Chaos Lab with 10 scenarios | ✅ Built |
+| Real-time agent traces | Timeline in incident cards | ✅ Built |
+| Production readiness | Cloud deployment architecture | 📋 Planned |
+| Documentation | Architecture docs | 📋 Planned |
+
+---
+
+## 🗓️ BUILD ORDER (10 Milestones)
+
+| # | Milestone | Status | Description |
+|---|---|---|---|
+| 1 | Digital World Engine | ✅ **COMPLETE** | 130 assets, 235 deps, metrics, events, chaos, time, state |
+| 2 | One complete agent loop | ⏳ Pending | Sentinel → detect → create incident |
+| 3 | Multi-agent investigation | ⏳ Pending | Investigator + Evidence + Dependency + Security agents |
+| 4 | Autonomous action | ⏳ Pending | Planner + Counterfactual + Risk + Executor |
+| 5 | Failure recovery | ⏳ Pending | Verifier + Rollback + Replan |
+| 6 | Memory system | ⏳ Pending | Episodic + Semantic + Procedural memory |
+| 7 | Prediction engine | ⏳ Pending | Trend detection + preventive incidents |
+| 8 | Governance/security | ⏳ Pending | Registry + Identity + Gateway + Permissions + Guardrails |
+| 9 | Cloud deployment | ⏳ Pending | Cloud Run + Cloud SQL + Pub/Sub + Firestore |
+| 10 | Demo polish | ⏳ Pending | 4-minute cinematic demo |
+
+---
+
+## 🎬 THE "WOW" DEMO SCRIPT (4 Minutes)
+
+**Scene 1** — Command Center calm: 130 systems, 10 agents, 98.7% health, 0 incidents
+
+**Scene 2** — Press: 🔥 INJECT CASCADING FAILURE
+
+**Scene 3** — Dashboard shows: DB overload → API latency → Auth failures → Portal failure → Attendance failure → 6 services affected, 1 root incident
+
+**Scene 4** — AEGIS says: "6 symptoms detected. 1 probable root cause identified." (Confidence: 96%)
+
+**Scene 5** — Evidence panel: Connection count +317%, Query latency +244%, API timeout +190%, Historical similarity 92%
+
+**Scene 6** — Planner generates 3 plans: Restart DB / Scale DB / Rollback deployment
+
+**Scene 7** — Counterfactual: Plan A (high downtime), Plan B (lowest risk), Plan C (medium). AEGIS chooses Plan B.
+
+**Scene 8** — Executor executes Plan B
+
+**Scene 9** — **MAKE IT FAIL** → "VERIFICATION FAILED" → ROLLBACK INITIATED
+
+**Scene 10** — AEGIS replans → Execute Plan B → Verify → SUCCESS
+
+**Scene 11** — Memory updated: "DB connection exhaustion → Strategy B → Success → 91% confidence"
+
+**Scene 12** — **"Three days later..."** — Similar failure begins → AEGIS recognizes pattern → Predicts failure → Prevents incident before it happens
+
+> **KILLER ENDING: The system didn't merely fix the problem. It learned from it and prevented the next one.**
+
+---
+
+## 🛠️ TECHNOLOGY STACK
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| AI Model | Gemini 2.5+ | Reasoning, analysis, planning |
+| Agent Framework | Google ADK | Agent orchestration |
+| Backend | Python + FastAPI | REST API + WebSocket server |
+| Frontend | Next.js (JavaScript) | Command Center dashboard |
+| Graph Engine | NetworkX | Dependency graph analysis |
+| Database | SQLite (dev) → Cloud SQL (prod) | Persistent state |
+| Session State | In-memory (dev) → Firestore (prod) | Fast agent/session state |
+| Events | In-memory (dev) → Pub/Sub (prod) | Async event bus |
+| Deployment | Local (dev) → Cloud Run (prod) | Containerized services |
+| Observability | OpenTelemetry | Traces + audit logs |
+| CSS | Vanilla CSS | Custom design system |
+| Fonts | Inter + JetBrains Mono | UI + data typography |
+
+---
+
+## ⚠️ IMPORTANT COMPETITION RULES
+
+- Project must be **newly created during the submission period**
+- Must use **Gemini 2.5+** through Gemini API or Vertex AI
+- Must use at least one **Google agent framework** (ADK, GenAI SDK, etc.)
+- Must demonstrate **Fortified Enterprise Fleet** components (Registry, Runtime, Memory, Identity, Gateway, Armor, Observability)
+- Demo must be **≤ 4 minutes**, in English or with English subtitles
+- Must visibly demonstrate the **backend running on Google Cloud**
+- Judges score: **Innovation 40% + Architecture 30% + Demo 30%**
+- Grand Prize: **$50,000 + $5,000 GCP credits**
+
+---
+
+## 📝 PROJECT STORY
+
+> **"We created a persistent digital institution and gave it an autonomous nervous system."**
+
+The institution generates problems. AEGIS sees them. AEGIS investigates them. AEGIS understands dependencies. AEGIS evaluates possible futures. AEGIS decides what it is allowed to do. AEGIS acts. AEGIS verifies. If it fails, AEGIS recovers. AEGIS remembers. And when the same pattern appears again — **AEGIS prevents the failure before it happens.**
+
+---
+
+*Document generated from AEGIS Ω development session — August 2026*

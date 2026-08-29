@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.db
+venv/
+.env
+.env.*
+frontend/node_modules/
+frontend/.next/
+
+*.mp4
