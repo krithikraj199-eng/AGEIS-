@@ -1,0 +1,46 @@
+# AEGIS Ω - Backend Dependencies
+
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+pydantic==2.9.0
+
+# Database
+sqlalchemy==2.0.35
+asyncpg==0.29.0
+alembic==1.13.0
+psycopg2-binary==2.9.9
+
+# Google AI
+google-genai==1.0.0
+google-adk==0.5.0
+
+# Async
+aiohttp==3.10.0
+httpx==0.27.0
+
+# Graph processing
+networkx==3.3
+
+# Data processing
+numpy==2.0.0
+pandas==2.2.0
+
+# Scheduling
+apscheduler==3.10.4
+
+# WebSocket
+websockets==13.0
+
+# Observability
+opentelemetry-api==1.27.0
+opentelemetry-sdk==1.27.0
+
+# Utilities
+python-dotenv==1.0.1
+pyyaml==6.0.2
+uuid6==2024.7.10
+rich==13.8.0
+
+# CORS
+python-multipart==0.0.9
